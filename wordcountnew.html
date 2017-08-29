@@ -1,0 +1,242 @@
+<!Doctype html>
+<html>
+ <head>
+ 	<link rel="stylesheet" type="text/css" href="wordcountnew.css">
+	 <script type="text/javascript">
+	
+	 var wc=0;
+	 var count=0;
+	 var wordnumber=0;
+	 var even =0;
+	 var last =0;
+	 var first=0;
+	 var inc=0;
+	 var z=0;
+	 var quit = false;
+	 var s=0;
+		
+		 document.addEventListener("keydown", calcul);
+
+		 /*
+		 This Function calculates the numbers of words and characters dynamically, as the user types.
+		 */
+		 function calcul(event)
+		 {
+		 	
+		 	var nam = document.getElementById('test').value;
+		 	var len = nam.length;
+		 	var tes = event.keyCode;
+
+		 	var pos = document.getElementById('test');
+		 	var val = test.value;
+		 	var position = val.slice(0, pos.selectionStart).length;
+		 	document.getElementById('posvalue').value = position;
+
+		 	//Checks for the length, if the length is less than 1 then '0' is set as the word count.
+		 	if(len<1)
+		 	{
+		 		document.getElementById('word').innerHTML = 0;
+		 	}
+		 	//Checks for the length, if the length is equal to 1 then '1' is set as the word count.
+		 	else if(len==1)
+		 	{
+		 		document.getElementById('word').innerHTML = 1;
+		 	}
+		 	//This increases every time when the user types in.
+			even++;
+			//Checks whether the wordnumber is 0.  
+			if(wordnumber==0)
+			{
+				//Checks whether the Keycode is 32, and if so, the following happens.
+				if(event.keyCode == 32)
+				{
+					 last=even;
+					 wordnumber++;
+					 document.getElementById('word').innerHTML = wordnumber;
+				}
+			}
+
+			//Checks whether the wordnumber is not 0 and the Keycode equal to '32' 
+			if(event.keyCode == 32 )
+			{
+
+				if(nam.charCodeAt(position) == '32'  && nam.charCodeAt(position+1) != '32') 
+				{
+					wordnumber++;
+					document.getElementById('word').innerHTML = wordnumber;
+				}
+
+			}
+			
+
+			if((len - position > 1) &&  (event.keyCode == 32) )
+			{
+				if(nam.charCodeAt(position-1) == '32' && nam.charCodeAt(position+1) != '32' && nam.charCodeAt(position-2) != '32' &&nam.charCodeAt(position-3) != '32' ) 
+				{
+					
+						wordnumber++;
+						document.getElementById('word').innerHTML = wordnumber;	
+					
+				}
+
+			}
+
+			if(event.keyCode == 8)
+		 	{
+		 		count--;
+		 		count = Math.abs(count);
+
+		 		z =Number(len)-1;
+		 		
+		 		if((nam.charCodeAt(position-2) != '32' && nam.charCodeAt(position-1) == '32'))
+		 		{
+		 		  
+		 		  	if(nam.charCodeAt(position-1) == '32') 
+		 			{
+
+		 				wordnumber--;
+		 				wordnumber = Math.abs(wordnumber);
+		 				document.getElementById('word').innerHTML = wordnumber;
+					}
+
+		 		}
+
+		 	}
+
+			if(tes> 64 && tes <91)
+			{
+
+				var zec = Number(position) - 1;
+
+			  	if(nam.charCodeAt(zec) == '32' )
+			  	{
+			  		
+			  		wordnumber++;
+			  		wordnumber = Math.abs(wordnumber);
+				}
+
+			  	
+				if(event.keyCode != 8 )
+				{
+					count++;
+				}
+				
+				document.getElementById('word').innerHTML = wordnumber;
+		 	}
+
+		 	document.getElementById('res').value = count;
+		 	document.getElementById('le').innerHTML = len;
+
+		}
+
+
+		function calculate()
+		{
+			
+			val=0;
+			var val = document.getElementById('test').value;	
+			var stretch = val.length;
+			var second = 1;
+			
+
+			inc++;
+
+			if(inc==1 && stretch >= 1)
+			{
+
+					s = Number(stretch);
+					for(var al=1; al<stretch; al++)
+					{
+						
+						if(val.charAt(al-1) == " " &&  val.charAt(al) != " ")
+						{
+							
+							wc++;
+						}
+						
+					}
+
+					wc+=1;
+					document.getElementById('wor').innerHTML = wc;
+			}
+
+		   	else if(inc>1 && s!= stretch)
+		   	{
+		   		wc =0;
+		   		for(var al=1; al<stretch; al++)
+					{
+						
+						if(val.charAt(al-1) == " " &&  val.charAt(al) != " ")
+						{
+							wc++;
+							
+						}
+						
+					}
+
+					wc+=1;
+					document.getElementById('wor').innerHTML = wc;
+			}
+
+		   	else if(stretch < 1)
+			{
+					
+				document.getElementById('wor').innerHTML = stretch;
+			}
+
+		   	document.getElementById('char').innerHTML = stretch;
+
+		   	calcul();
+			
+		}
+
+		
+
+ 	</script>
+ </head>
+	<body>
+		<div class="flex-container">
+			<div class="head">
+				<div class="headcontent">WORD COUNT</div>
+			</div>
+			<div class="instructions">
+				<div class ="instruct">
+					<div class="instructhead">This Wordcount Application can be used in 2 ways:</div>
+				</div>
+				<div class ="instruct">
+					<div class="no">1.</div>
+					<div class="instructcont">To check word count, simply place your cursor into the text box above and start typing. You'll see the number of characters and words increase 	or decrease(on the top) as you type, delete, and edit them.
+					</div>
+				</div>
+				<div class ="instruct">
+					<div class="no">2.</div>
+						<div class="instructcont">You can also copy and paste text from another program over into the online editor above.Once you paste the document, click on the "Submit" button to know the count(this can be viewd at the bottom i.e below the Submit button.)</div>
+				</div>
+			</div>
+		 <div class = content>
+			<div id="disp">
+				<div class="displaycon">
+	  				<span id="word"></span><span id="words">WORDS</span>
+	  				<span id="le"></span><span id="chars">CHARACTERS</span>
+	  			</div>
+	  		</div>
+				<input type="text" name="pos" id="posvalue" style="display: none;">
+	  			
+	 			<div class="cont">
+	 				<textarea id="test" rows="20" columns="250" placeholder="Start typing, or copy and paste your document here.."></textarea>
+	 				<div class="submit" onclick="calculate();">
+	 					<div class="sub">Submit</div>
+	 				</div>
+	 			</div>
+	 			
+	 			<input type="text" name="res" id="res"  style="display: none;">
+	 			<div id="disp1">
+	 				<div id="displaymanual">
+	 					<span id="wor"></span><span id="mwords">WORDS</span>
+	 					<span id="char"></span><span id="mchar">CHARACTERS</span>
+	 				</div>
+	 			</div>
+	 	 </div>
+	    </div>
+	</body>
+</html>
